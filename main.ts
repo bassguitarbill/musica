@@ -1,9 +1,10 @@
 import KeySignature from "./KeySignature.js";
 
-new KeySignature('C');
-const song = {
-  key: '',
-};
+new KeySignature('E♭m');
+interface Song { 
+  key?: KeySignature,
+}
+const song : Song = {};
 
 (window as any).song = song;
 
@@ -32,9 +33,9 @@ const MAJOR_KEY_SIGNATURES = [
 const KEY_SIGNATURES = MAJOR_KEY_SIGNATURES.reduce((acc, v) => acc.concat([v, v + 'm']), [] as string[]);
 
 function chooseKey() {
-  song.key = chooseOneFromArray(KEY_SIGNATURES);
+  song.key = new KeySignature(chooseOneFromArray(KEY_SIGNATURES));
   console.log(song);
-  document.body.append(generateKeySignature(song.key));
+  document.body.append(generateKeySignature(song.key.key));
 }
 
 document.body.append(generateChooseKeyButton());
