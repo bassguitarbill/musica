@@ -1,5 +1,7 @@
 import KeySignature from "./KeySignature.js";
 
+const keySignatureZone = document.getElementById('KeySignatureZone')!;
+
 new KeySignature('E♭m');
 interface Song { 
   key?: KeySignature,
@@ -16,6 +18,7 @@ function chooseOneFromArray(arr: any[]) {
 function generateChooseKeyButton(): HTMLButtonElement {
   const button = document.createElement('button');
   button.innerText = "Choose a key";
+  button.setAttribute('id', 'ChooseKeyButton');
   button.addEventListener('click', chooseKey);
   return button;
 }
@@ -28,14 +31,18 @@ function generateKeySignature(key: string): HTMLHeadingElement {
 }
 
 const MAJOR_KEY_SIGNATURES = [
-  'A', 'B♭', 'B', 'C', 'C♯', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'G♯',
+  'A', 'B♭', 'B', 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭',
 ];
-const KEY_SIGNATURES = MAJOR_KEY_SIGNATURES.reduce((acc, v) => acc.concat([v, v + 'm']), [] as string[]);
+
+const MINOR_KEY_SIGNATURES = [
+  'Am', 'B♭m', 'Bm', 'Cm', 'C♯m', 'Dm', 'D♯m', 'Em', 'Fm', 'F♯m', 'Gm', 'G♯m',
+];
+const KEY_SIGNATURES = MAJOR_KEY_SIGNATURES.concat(MINOR_KEY_SIGNATURES);
 
 function chooseKey() {
   song.key = new KeySignature(chooseOneFromArray(KEY_SIGNATURES));
   console.log(song);
-  document.body.append(generateKeySignature(song.key.key));
+  keySignatureZone.append(generateKeySignature(song.key.key));
 }
 
-document.body.append(generateChooseKeyButton());
+keySignatureZone.append(generateChooseKeyButton());
