@@ -5,3 +5,14 @@ html, body {
 #KeySignatureZone {
   border: 2px solid black;
 }
+
+#ChordZone {
+  border: 2px solid black;
+  display: none;
+}
+
+.Chord {
+  font-size: xx-large;
+  border: 1px dotted black;
+  margin-left: 5px;
+}
