@@ -1,3 +1,4 @@
+import KeyPicker from "./KeyPicker.js";
 import KeySignature from "./KeySignature.js";
 
 const keySignatureZone = document.getElementById('KeySignatureZone')!;
@@ -50,7 +51,7 @@ function generateChord(chordName: string): HTMLSpanElement {
 }
 
 const MAJOR_KEY_SIGNATURES = [
-  'A', 'B♭', 'B', 'C', 'D♭', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭',
+  'C', 'G', 'D', 'A', 'E', 'B', 'F♯', 'D♭', 'A♭', 'E♭', 'B♭', 'F', 
 ];
 
 const MINOR_KEY_SIGNATURES = [
@@ -83,3 +84,12 @@ function displayChords() {
 
 keySignatureZone.append(generateChooseKeyButton());
 chordZone.append(generateChooseChordsButton());
+
+const keyPicker = new KeyPicker(document.getElementById('KeyPicker')! as HTMLCanvasElement);
+function drawKeyPicker() {
+  keyPicker.draw();
+  window.requestAnimationFrame(drawKeyPicker);
+}
+window.requestAnimationFrame(drawKeyPicker);
+
+export { MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES };
