@@ -20,14 +20,6 @@ function chooseOneFromArray(arr: any[]) {
   return arr[index];
 }
 
-function generateChooseKeyButton(): HTMLButtonElement {
-  const button = document.createElement('button');
-  button.innerText = "Choose a key";
-  button.setAttribute('id', 'ChooseKeyButton');
-  button.addEventListener('click', chooseKey);
-  return button;
-}
-
 function generateChooseChordsButton(): HTMLButtonElement {
   const button = document.createElement('button');
   button.innerText = "Choose some chords";
@@ -55,13 +47,13 @@ const MAJOR_KEY_SIGNATURES = [
 ];
 
 const MINOR_KEY_SIGNATURES = [
-  'Am', 'B♭m', 'Bm', 'Cm', 'C♯m', 'Dm', 'D♯m', 'Em', 'Fm', 'F♯m', 'Gm', 'G♯m',
+  'Am', 'Em', 'Bm', 'F♯m', 'C♯m', 'G♯m', 'D♯m', 'B♭m', 'Fm', 'Cm', 'Gm', 'Dm',
 ];
 const KEY_SIGNATURES = MAJOR_KEY_SIGNATURES.concat(MINOR_KEY_SIGNATURES);
 
-function chooseKey() {
-  song.key = new KeySignature(chooseOneFromArray(KEY_SIGNATURES));
-  console.log(song);
+function chooseKey(key: string) {
+  song.key = new KeySignature(key);
+  //console.log(song);
   keySignatureZone.append(generateKeySignature(song.key.key));
   chordZone.style.display = 'block';
 }
@@ -82,14 +74,13 @@ function displayChords() {
   song.chords.forEach(c => chordZone.append(generateChord(c)));
 }
 
-keySignatureZone.append(generateChooseKeyButton());
 chordZone.append(generateChooseChordsButton());
 
-const keyPicker = new KeyPicker(document.getElementById('KeyPicker')! as HTMLCanvasElement);
+const keyPicker = new KeyPicker(document.getElementById('KeyPicker')! as HTMLCanvasElement, chooseKey);
 function drawKeyPicker() {
   keyPicker.draw();
   window.requestAnimationFrame(drawKeyPicker);
 }
 window.requestAnimationFrame(drawKeyPicker);
 
-export { MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES };
+export { MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES, KEY_SIGNATURES, chooseOneFromArray };
