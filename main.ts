@@ -3,8 +3,11 @@ import KeySignature from "./KeySignature.js";
 
 const keySignatureZone = document.getElementById('KeySignatureZone')!;
 const chordZone = document.getElementById('ChordZone')!;
+const keyPickerCanvas = document.getElementById('KeyPicker')! as HTMLCanvasElement
+const keyPicker = new KeyPicker(keyPickerCanvas, chooseKey);
+const showKeyPickerButton = document.getElementById('ShowKeyPicker')!;
+showKeyPickerButton.addEventListener('click', showKeyPicker);
 
-new KeySignature('E♭m');
 interface Song { 
   key?: KeySignature,
   chords: string[],
@@ -56,6 +59,17 @@ function chooseKey(key: string) {
   //console.log(song);
   keySignatureZone.append(generateKeySignature(song.key.key));
   chordZone.style.display = 'block';
+  hideKeyPicker();
+}
+
+function hideKeyPicker() {
+  keyPicker.canvas.style.display = 'none';
+  showKeyPickerButton.style.display = 'inline';
+}
+
+function showKeyPicker() {
+  keyPicker.canvas.style.display = 'inline';
+  showKeyPickerButton.style.display = 'none';
 }
 
 function chooseChords(numberOfChords: number) {
@@ -75,8 +89,6 @@ function displayChords() {
 }
 
 chordZone.append(generateChooseChordsButton());
-
-const keyPicker = new KeyPicker(document.getElementById('KeyPicker')! as HTMLCanvasElement, chooseKey);
 function drawKeyPicker() {
   keyPicker.draw();
   window.requestAnimationFrame(drawKeyPicker);
