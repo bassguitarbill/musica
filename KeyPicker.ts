@@ -27,6 +27,7 @@ export default class KeyPicker {
 
   drawMajorKeys() {
     const { ctx, center } = this;
+    ctx.textAlign = 'center';
     MAJOR_KEY_SIGNATURES.forEach((_key, i) => {
       ctx.beginPath();
       ctx.moveTo(center, center);
@@ -35,11 +36,18 @@ export default class KeyPicker {
       ctx.fillStyle = i % 2 === 0 ? PRIMARY_COLOR : SECONDARY_COLOR;
       ctx.fill();
       ctx.closePath();
+      const angle = Math.PI * (((2 * i)-6)/12)
+      const x = Math.cos(angle) * center * 0.85;
+      const y = Math.sin(angle) * center * 0.85;
+      //ctx.moveTo(center + x, center + y);
+      ctx.fillStyle = 'black';
+      ctx.fillText(_key, center + x, center + y);
     });
   }
 
   drawMinorKeys() {
     const { ctx, center, minorRadius } = this;
+    ctx.textAlign = 'center';
     MINOR_KEY_SIGNATURES.forEach((_key, i) => {
       ctx.beginPath();
       ctx.moveTo(center, center);
@@ -48,17 +56,26 @@ export default class KeyPicker {
       ctx.fillStyle = i % 2 === 1 ? PRIMARY_COLOR : SECONDARY_COLOR;
       ctx.fill();
       ctx.closePath();
+      const angle = Math.PI * (((2 * i)-6)/12)
+      const x = Math.cos(angle) * center * 0.5;
+      const y = Math.sin(angle) * center * 0.5;
+      //ctx.moveTo(center + x, center + y);
+      ctx.fillStyle = 'black';
+      ctx.fillText(_key, center + x, center + y);
     });
   }
   
   drawRandomButton() {
     const { ctx, center, randomRadius } = this;
+    ctx.textAlign = 'center';
     ctx.beginPath();
     ctx.moveTo(center, center);
     ctx.arc(center, center, randomRadius, 0, Math.PI * 2);
     ctx.fillStyle = TERTIARY_COLOR;
     ctx.fill();
     ctx.closePath();
+    ctx.fillStyle = 'black';
+    ctx.fillText('Random', center, center);
   }
 
   onClick(ev: MouseEvent) {
