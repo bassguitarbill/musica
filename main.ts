@@ -1,12 +1,6 @@
 import KeyPicker from "./KeyPicker.js";
 import KeySignature from "./KeySignature.js";
-
-const keySignatureZone = document.getElementById('KeySignatureZone')!;
-const chordZone = document.getElementById('ChordZone')!;
-const keyPickerCanvas = document.getElementById('KeyPicker')! as HTMLCanvasElement
-const keyPicker = new KeyPicker(keyPickerCanvas, chooseKey);
-const showKeyPickerButton = document.getElementById('ShowKeyPicker')!;
-showKeyPickerButton.addEventListener('click', showKeyPicker);
+import SheetMusic from "./SheetMusic.js";
 
 interface Song { 
   key?: KeySignature,
@@ -17,6 +11,17 @@ const song : Song = {
 };
 
 (window as any).song = song;
+
+const keySignatureZone = document.getElementById('KeySignatureZone')!;
+const chordZone = document.getElementById('ChordZone')!;
+const keyPickerCanvas = document.getElementById('KeyPicker')! as HTMLCanvasElement
+const keyPicker = new KeyPicker(keyPickerCanvas, chooseKey);
+
+const showKeyPickerButton = document.getElementById('ShowKeyPicker')!;
+showKeyPickerButton.addEventListener('click', showKeyPicker);
+
+const sheetMusicCanvas = document.getElementById('SheetMusic')! as HTMLCanvasElement;
+const sheetMusic = new SheetMusic(song, sheetMusicCanvas);
 
 function chooseOneFromArray(arr: any[]) {
   const index = Math.floor(Math.random() * arr.length);
@@ -89,10 +94,11 @@ function displayChords() {
 }
 
 chordZone.append(generateChooseChordsButton());
-function drawKeyPicker() {
+function draw() {
   keyPicker.draw();
-  window.requestAnimationFrame(drawKeyPicker);
+  sheetMusic.draw();
+  window.requestAnimationFrame(draw);
 }
-window.requestAnimationFrame(drawKeyPicker);
+window.requestAnimationFrame(draw);
 
-export { MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES, KEY_SIGNATURES, chooseOneFromArray };
+export { MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES, KEY_SIGNATURES, chooseOneFromArray, Song };
