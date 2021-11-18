@@ -95,7 +95,7 @@ function showKeyPicker() {
 function chooseChords(numberOfChords: number) {
   song.chords = [];
   for (let i=0; i<numberOfChords; i++) {
-    song.chords.push(chooseOneFromArray(song.key!.chords));
+    song.chords.push(chooseOneFromArrayWeighted(song.key!.chords, song.key!.chordWeights));
   }
   displayChords();
 }

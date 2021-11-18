@@ -1,5 +1,6 @@
 export default class KeySignature {
   chords: string[];
+  chordWeights: number[];
   notes: string[];
   isMinor: boolean;
   tonic: string;
@@ -27,6 +28,7 @@ export default class KeySignature {
     }
 
     this.chords = this.notes.map((n, i) => `${n}${this.isMinor ? MINOR_SCALE_CHORDS[i] : MAJOR_SCALE_CHORDS[i]}`)
+    this.chordWeights = this.isMinor ? MINOR_SCALE_CHORD_WEIGHTS : MAJOR_SCALE_CHORD_WEIGHTS;
   }
 }
 
@@ -36,6 +38,8 @@ const FIFTHS = ['C', 'G', 'D', 'A', 'E', 'B', 'F♯', 'C♯', ]//'G♯', 'D♯',
 const FOURTHS = ['C', 'F', 'B♭', 'E♭', 'A♭', 'D♭', 'G♭', 'C♭',] // 'F♭', 'B♭♭', 'E♭♭', 'A♭♭'];
 
 const MAJOR_SCALE_CHORDS = ['', 'm', 'm', '', '', 'm', 'o'];
+const MAJOR_SCALE_CHORD_WEIGHTS = [1.0, 0.5, 0.3, 0.7, 0.8, 0.8, 0.2];
 const MINOR_SCALE_CHORDS = ['m', 'o', '', 'm', 'm', '', ''];
+const MINOR_SCALE_CHORD_WEIGHTS = [1.0, 0.3, 0.7, 0.8, 0.8, 0.6, 0.5];
 
 const SCALE_DEGREES = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
