@@ -28,6 +28,17 @@ function chooseOneFromArray(arr: any[]) {
   return arr[index];
 }
 
+function chooseOneFromArrayWeighted(arr: any[], weightArr: number[]) {
+  const total = weightArr.reduce((acc, w) => acc + w, 0);
+  let rand = Math.random() * total; // Number between 0 and the total of all weights
+  let index = -1;
+  while (rand > 0) {
+    index++;
+    rand -= weightArr[index];
+  }
+  return arr[index];
+}
+
 function generateChooseChordsButton(): HTMLButtonElement {
   const button = document.createElement('button');
   button.innerText = "Choose some chords";
@@ -53,11 +64,15 @@ function generateChord(chordName: string): HTMLSpanElement {
 const MAJOR_KEY_SIGNATURES = [
   'C', 'G', 'D', 'A', 'E', 'B', 'F♯', 'D♭', 'A♭', 'E♭', 'B♭', 'F', 
 ];
+const MAJOR_KEY_SIGNATURE_WEIGHTS = [
+  1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,
+]
 
 const MINOR_KEY_SIGNATURES = [
   'Am', 'Em', 'Bm', 'F♯m', 'C♯m', 'G♯m', 'D♯m', 'B♭m', 'Fm', 'Cm', 'Gm', 'Dm',
 ];
 const KEY_SIGNATURES = MAJOR_KEY_SIGNATURES.concat(MINOR_KEY_SIGNATURES);
+const KEY_SIGNATURE_WEIGHTS = MAJOR_KEY_SIGNATURE_WEIGHTS.concat(MAJOR_KEY_SIGNATURE_WEIGHTS);
 
 function chooseKey(key: string) {
   song.key = new KeySignature(key);
@@ -101,4 +116,4 @@ function draw() {
 }
 window.requestAnimationFrame(draw);
 
-export { MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES, KEY_SIGNATURES, chooseOneFromArray, Song };
+export { MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES, KEY_SIGNATURES, KEY_SIGNATURE_WEIGHTS, chooseOneFromArray, chooseOneFromArrayWeighted, Song };

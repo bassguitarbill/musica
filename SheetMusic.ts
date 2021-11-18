@@ -8,12 +8,6 @@ export default class SheetMusic {
   }
 
   draw() {
-    const { ctx, canvas, song } = this;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'blue';
-    ctx.textAlign = 'left';
-    ctx.font = '48px sans';
-    ctx.fillText(song.key?.key || '', 50, 50);
     this.drawStaff();
     this.drawClef();
   }

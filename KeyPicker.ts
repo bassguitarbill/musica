@@ -1,4 +1,4 @@
-import { chooseOneFromArray, KEY_SIGNATURES, MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES } from "./main.js";
+import { chooseOneFromArrayWeighted, KEY_SIGNATURES, KEY_SIGNATURE_WEIGHTS, MAJOR_KEY_SIGNATURES, MINOR_KEY_SIGNATURES } from "./main.js";
 
 export default class KeyPicker {
   readonly ctx: CanvasRenderingContext2D;
@@ -84,7 +84,7 @@ export default class KeyPicker {
     // Get the distance squared
     const distanceSquared = (offsetX - center) ** 2 + (offsetY - center) ** 2;
     if (distanceSquared < randomRadius ** 2) {
-      chooseKey(chooseOneFromArray(KEY_SIGNATURES));
+      chooseKey(chooseOneFromArrayWeighted(KEY_SIGNATURES, KEY_SIGNATURE_WEIGHTS));
       return;
     }
     // Get the angle
