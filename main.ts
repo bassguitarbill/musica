@@ -35,12 +35,12 @@ document.querySelectorAll('input[type=range]').forEach(e => {
 });
 
 function saveChordWeights() {
-  const weights:{ [k:string]: string} = {};
+  const weights:{ [k:string]: number} = {};
   document.querySelectorAll('input[type=range]').forEach(e => {
-    weights[e.id] = (e as HTMLInputElement).value;
+    weights[e.id] = Number((e as HTMLInputElement).value);
   });
   window.localStorage.setItem('chordWeights', JSON.stringify(weights));
-  console.log('saved');
+  applyChordWeights();
 }
 
 let majorChordWeights = [8, 5, 3, 5, 7, 6, 2];
