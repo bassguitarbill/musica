@@ -16,9 +16,59 @@
       <canvas height="300px" width="300px" id="KeyPicker"></canvas>
       <button id="ShowKeyPicker">Show Key Picker</button>
     </div>
-    <span class="material-icons-outlined">
-      casino
-    </span>
+    <button id="ChordWeightZoneButton">Show chord weights</button>
+    <div id="ChordWeightZone">
+      <div id="MajorChordWeightZone">
+        <h4>Major Chords</h4>
+        <div>
+          <input type="range" id="major-I" name="major-I" min="0" max="11">
+          <label for="major-I">I</label>
+        </div><div>
+          <input type="range" id="major-ii" name="major-i" min="0" max="11">
+          <label for="major-ii">ii</label>
+        </div><div>
+          <input type="range" id="major-iii" name="major-iii" min="0" max="11">
+          <label for="major-iii">iii</label>
+        </div><div>
+          <input type="range" id="major-IV" name="major-IV" min="0" max="11">
+          <label for="major-IV">IV</label>
+        </div><div>
+          <input type="range" id="major-V" name="major-IV" min="0" max="11">
+          <label for="major-V">V</label>
+        </div><div>
+          <input type="range" id="major-vi" name="major-vi" min="0" max="11">
+          <label for="major-vi">vi</label>
+        </div><div>
+          <input type="range" id="major-vii" name="major-vii" min="0" max="11">
+          <label for="major-vii">vii</label>
+        </div>
+      </div>
+      <div id="MinorChordWeightZone">
+        <h4>Minor Chords</h4>
+        <div>
+          <input type="range" id="minor-i" name="minor-i" min="0" max="11">
+          <label for="minor-i">i</label>
+        </div><div>
+          <input type="range" id="minor-ii" name="minor-ii" min="0" max="11">
+          <label for="minor-ii">ii</label>
+        </div><div>
+          <input type="range" id="minor-III" name="minor-III" min="0" max="11">
+          <label for="minor-III">III</label>
+        </div><div>
+          <input type="range" id="minor-iv" name="minor-iv" min="0" max="11">
+          <label for="minor-iv">iv</label>
+        </div><div>
+          <input type="range" id="minor-v" name="minor-v" min="0" max="11">
+          <label for="minor-v">v</label>
+        </div><div>
+          <input type="range" id="minor-VI" name="minor-VI" min="0" max="11">
+          <label for="minor-VI">VI</label>
+        </div><div>
+          <input type="range" id="minor-VII" name="minor-VII" min="0" max="11">
+          <label for="minor-VII">VII</label>
+        </div>
+      </div>
+    </div>
     <div id="ChordZone"></div>
     <div id="SheetMusicZone">
       <canvas height="300px" width="1200px" id="SheetMusic"></canvas>

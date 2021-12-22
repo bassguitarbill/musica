@@ -6,6 +6,7 @@ interface Song {
   key?: KeySignature,
   chords: string[],
 }
+
 const song : Song = {
   chords: [],
 };
@@ -16,6 +17,10 @@ const keySignatureZone = document.getElementById('KeySignatureZone')!;
 const chordZone = document.getElementById('ChordZone')!;
 const keyPickerCanvas = document.getElementById('KeyPicker')! as HTMLCanvasElement
 const keyPicker = new KeyPicker(keyPickerCanvas, chooseKey);
+
+const chordWeights = document.getElementById('ChordWeightZone')!;
+const showChordWeightsButton = document.getElementById('ChordWeightZoneButton')!;
+showChordWeightsButton.addEventListener('click', toggleChordWeights);
 
 const showKeyPickerButton = document.getElementById('ShowKeyPicker')!;
 showKeyPickerButton.addEventListener('click', showKeyPicker);
@@ -90,6 +95,24 @@ function hideKeyPicker() {
 function showKeyPicker() {
   keyPicker.canvas.style.display = 'inline';
   showKeyPickerButton.style.display = 'none';
+}
+
+function showChordWeights() {
+  chordWeights.style.display = "flex";
+  showChordWeightsButton.innerText = "Hide chord weights";
+}
+
+function hideChordWeights() {
+  chordWeights.style.display = "none";
+  showChordWeightsButton.innerText = "Show chord weights";
+}
+
+function toggleChordWeights() {
+  if (chordWeights.style.display === "flex") {
+    hideChordWeights();
+  } else {
+    showChordWeights();
+  }
 }
 
 function chooseChords(numberOfChords: number) {

@@ -11,6 +11,24 @@ html, body {
   display: none;
 }
 
+#ChordWeightZone {
+  border: 2px solid black;
+  display: none;
+  justify-content: space-evenly;
+}
+
+#MajorChordWeightZone, #MinorChordWeightZone {
+  display: inline;
+}
+
+#MajorChordWeightZone > div {
+  display: block;
+}
+
+#MinorChordWeightZone > div {
+  display: block;
+}
+
 .Chord {
   font-size: xx-large;
   border: 1px dotted black;
