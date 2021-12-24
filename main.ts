@@ -34,10 +34,36 @@ document.querySelectorAll('input[type=range]').forEach(e => {
   });
 });
 
+function allChordWeights(): HTMLInputElement[] {
+  return Array.prototype.slice.call(document.querySelectorAll('input[type=range]'));
+}
+
+function allMajorChordWeights(): HTMLInputElement[] {
+  return allChordWeights().filter(e => e.id.startsWith('major'));
+}
+
+function allMinorChordWeights(): HTMLInputElement[] {
+  return allChordWeights().filter(e => e.id.startsWith('minor'));
+}
+
 function saveChordWeights() {
   const weights:{ [k:string]: number} = {};
-  document.querySelectorAll('input[type=range]').forEach(e => {
-    weights[e.id] = Number((e as HTMLInputElement).value);
+  const isAllZeroesMajor = !allMajorChordWeights().find(e => {
+    return Number(e.value) > 0;
+  })
+  if(isAllZeroesMajor) {
+    chooseOneFromArray(allMajorChordWeights()).value = 1;
+  }
+  
+  const isAllZeroesMinor = !allMinorChordWeights().find(e => {
+    return Number(e.value) > 0;
+  });
+  if(isAllZeroesMinor) {
+    chooseOneFromArray(allMinorChordWeights()).value = 1;
+  }
+
+  allChordWeights().forEach(e => {
+    weights[e.id] = Number(e.value);
   });
   window.localStorage.setItem('chordWeights', JSON.stringify(weights));
   applyChordWeights();
